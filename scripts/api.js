@@ -6,7 +6,7 @@ const api = (function () {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/neill-darren';
 
   function getItems(callback) {
-    
+
     $.getJSON(`${BASE_URL}/items`, callback);
 
   }
@@ -24,13 +24,13 @@ const api = (function () {
     });
   }
 
-  const updateItem = function(id, updateData, callback) {
+  const updateItem = function (id, updateData, callback) {
 
     $.ajax({
       url: `${BASE_URL}/items/${id}`,
       method: 'PATCH',
       contentType: 'application/json',
-      data: JSON.stringify /* ... */,
+      data: JSON.stringify(updateData),
       success: callback,
     });
   };
