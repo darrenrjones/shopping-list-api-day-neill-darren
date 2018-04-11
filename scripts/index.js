@@ -10,6 +10,8 @@ $(document).ready(function () {
     console.log(items);
     items.forEach((item) => store.addItem(item));
     shoppingList.render();
+
+
   });
 
 });
