@@ -6,7 +6,7 @@ const api = (function () {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/neill-darren';
 
   function getItems(callback) {
-    callback('api working');
+    
 
     $.getJSON(`${BASE_URL}/items`, callback);
 

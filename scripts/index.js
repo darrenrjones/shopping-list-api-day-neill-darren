@@ -4,14 +4,13 @@
 $(document).ready(function () {
   shoppingList.bindEventListeners();
   shoppingList.render();
-});
+ 
 
-
-
-//
-
-api.createItem('pears', (newItem) => {
   api.getItems((items) => {
     console.log(items);
+    items.forEach((item) => store.addItem(item));
+    shoppingList.render();
   });
+
 });
+
