@@ -78,16 +78,14 @@ const shoppingList = (function () {
   
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-      const id = getItemIdFromElement(event.currentTarget);
-
-      // store.findAndToggleChecked(id);
+      const id = getItemIdFromElement(event.currentTarget);      
 
       const currentItem = store.items.find(item => item.id === id);
-      console.log(currentItem);
+      // console.log(currentItem);
       const currentItemCheckedStatus = currentItem.checked;
-      console.log(currentItemCheckedStatus);
+      // console.log(currentItemCheckedStatus);
       const checkedchanges = {checked: !currentItemCheckedStatus};
-      console.log(checkedchanges);
+      // console.log(checkedchanges);
       
       api.updateItem(id, checkedchanges, ()=> {
         store.findAndUpdate(id,checkedchanges);
@@ -98,13 +96,18 @@ const shoppingList = (function () {
   
   function handleDeleteItemClicked() {
     // like in `handleItemCheckClicked`, we use event delegation
-    $('.js-shopping-list').on('click', '.js-item-delete', event => {
-      // get the index of the item in store.items
+    $('.js-shopping-list').on('click', '.js-item-delete', event => {      
       const id = getItemIdFromElement(event.currentTarget);
+      console.log(id);
+      const currentItem = store.items.find(item => item.id === id);
+      console.log(currentItem);
+
+
       // delete the item
-      store.findAndDelete(id);
-      // render the updated shopping list
-      render();
+      api.deleteItem(id, ()=> {
+        store.findAndDelete(id);        
+        render();
+      });     
     });
   }
   
@@ -131,7 +134,7 @@ const shoppingList = (function () {
   
   function handleShoppingListSearch() {
     $('.js-shopping-list-search-entry').on('keyup', event => {
-      const val = $(event.currentTarget).val();
+      const val = $(event.currentTarget).val().toLowerCase();
       store.setSearchTerm(val);
       render();
     });
